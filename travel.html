@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Travel Details</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="travel.html">Destinations</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+  <div class="travel-header">
+    <h1 id="travel-route"></h1>
+  </div>
+
+  <div class="section">
+    <h2>Top Destinations</h2>
+    <div id="destinations" class="card-container"></div>
+  </div>
+
+  <div class="section">
+    <h2>Famous Foods</h2>
+    <div id="foods" class="card-container"></div>
+  </div>
+
+  <div class="map-button">
+    <a id="mapLink" target="_blank"><button>Open in Google Maps</button></a>
+  </div>
+
+  <div class="back-button">
+    <a href="index.html"><button>Back to Home</button></a>
+  </div>
+
+  <div id="infoModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal()">&times;</span>
+      <h2 id="modalTitle"></h2>
+      <img id="modalImage" src="" alt="Image" />
+      <p id="modalDescription"></p>
+    </div>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+  <script>
+    const source = localStorage.getItem("source");
+    const destination = localStorage.getItem("destination");
+
+    if (!source || !destination) {
+      document.body.innerHTML = "<p>Missing source or destination. Please go back and enter details.</p>";
+    } else {
+      document.getElementById("travel-route").textContent = `Travel from ${source} to ${destination}`;
+
+      const state = indianStates.find(s => s.name.toLowerCase() === destination.toLowerCase());
+
+      if (state) {
+        showCards(state.topDestinations, "destinations");
+        showCards(state.famousFoods, "foods");
+
+        const mapUrl = `https://www.google.com/maps/dir/${encodeURIComponent(source)}/${encodeURIComponent(destination)}`;
+        document.getElementById("mapLink").href = mapUrl;
+      } else {
+        document.getElementById("destinations").innerHTML = "<p>No data found for this state.</p>";
+        document.getElementById("foods").innerHTML = "<p>No data found for this state.</p>";
+      }
+    }
+  </script>
+  <footer>
+    <p>&copy; 2024 ExploreEase. All rights reserved.</p>
+    <ul>
+      <li><a href="privacy.html">Privacy Policy</a></li>
+      <li><a href="terms.html">Terms of Service</a></li>
+    </ul>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ExploreEase</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="travel.html">Destinations</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+  <div class="hero">
+    <h1>ExploreEase</h1>
+    <p class="tagline">Simplifying Your Travel, Amplifying Your Experience</p>
+    <div class="slider-background">
+      <div class="slide" style="background-image: url('hill.jpg');"></div>
+      <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dHJhdmVsJTIwbGFuZHNjYXBlfGVufDB8fDB8fHww');"></div>
+      <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1433838552652-f9a46b332c40?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8dHJhdmVsJTIwbGFuZHNjYXBlfGVufDB8fDB8fHww');"></div>
+      <div class="slide" style="background-image: url('https://media.istockphoto.com/id/904172104/photo/weve-made-it-all-this-way-i-am-proud.jpg?s=612x612&w=0&k=20&c=MewnsAhbeGRcMBN9_ZKhThmqPK6c8nCT8XYk5ZM_hdg=');"></div>
+      <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8dHJhdmVsfGVufDB8fDB8fHww');"></div>
+    </div>
+  </div>
+
+  <div class="input-section">
+    <input type="text" id="source" placeholder="Enter your Source (city or village)" />
+    <input type="text" id="destination" placeholder="Enter your Destination (state)" />
+    <button onclick="submitForm()">Show Travel Details</button>
+  </div>
+
+  <div class="featured-destinations">
+    <h2>Featured Destinations</h2>
+    <div class="destination-grid">
+      <div class="destination">
+        <img src="https://images.unsplash.com/photo-1503614472-8c93d56e92ce?q=60&w=400" alt="Goa">
+        <h3>Goa</h3>
+        <p>Beautiful beaches and vibrant nightlife.</p>
+      </div>
+      <div class="destination">
+        <img src="https://lp-cms-production.imgix.net/2024-08/shutterstock2044878389.jpg?auto=compress&format=auto&fit=crop&q=50&w=1200&h=800" alt="Kerala">
+        <h3>Kerala</h3>
+        <p>Serene backwaters and lush greenery.</p>
+      </div>
+      <div class="destination">
+        <img src="https://s7ap1.scene7.com/is/image/incredibleindia/1-sam-sand-dunes-jaisalmer-rajasthan-hero?qlt=82&ts=1726659973648" alt="Rajasthan">
+        <h3>Rajasthan</h3>
+        <p>Royal palaces and rich cultural heritage.</p>
+      </div>
+      <div class="destination">
+        <img src="https://www.oyorooms.com/blog/wp-content/uploads/2018/10/cover-1.png" alt="Uttarakhand">
+        <h3>Uttarakhand</h3>
+        <p>nestled in the Himalayas, offers stunning mountain scenery.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="about-us">
+    <h2>About Us</h2>
+    <p>Welcome to ExploreEase — your personalized travel planning companion.
+      We aim to simplify and enrich your travel experience across India by providing detailed insights into top destinations, local cuisines, and seamless route planning.</p>
+  </div>
+
+  <footer>
+    <p>&copy; 2024 ExploreEase. All rights reserved.</p>
+    <ul>
+      <li><a href="privacy.html">Privacy Policy</a></li>
+      <li><a href="terms.html">Terms of Service</a></li>
+    </ul>
+  </footer>
+
+  <script>
+    function submitForm() {
+      const source = document.getElementById("source").value.trim();
+      const destination = document.getElementById("destination").value.trim();
+      if (!source || !destination) {
+        alert("Please enter both source and destination!");
+        return;
+      }
+      localStorage.setItem("source", source);
+      localStorage.setItem("destination", destination);
+      window.location.href = "travel.html";
+    }
+
+    const slides = document.querySelectorAll('.slide');
+    let currentSlide = 0;
+
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === index);
+      });
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % slides.length;
+      showSlide(currentSlide);
+    }
+
+    showSlide(currentSlide);
+    setInterval(nextSlide, 2100);
+  </script>
+</body>
+</html>
